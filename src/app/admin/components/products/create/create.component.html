@@ -11,6 +11,9 @@
     <input matInput value="0" type="number" min="0" #txtPrice>
   </mat-form-field>
   <button mat-raised-button class="btn" color="accent" (click)="create(txtName,txtStock,txtPrice)">Create</button>
+
+
+  <app-file-upload [options]="fileUploadOptions"  ></app-file-upload>
 <!--   
   <mat-form-field appearance="fill">
     <mat-label>Select</mat-label>

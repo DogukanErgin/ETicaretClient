@@ -10,11 +10,17 @@ import {MatButtonModule} from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
+import { FileUploadModule } from './services/common/file-upload/file-upload.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    
+    
     
    
   ],
@@ -29,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     HttpClientModule,
+    FileUploadModule
    
   ],
   providers: [  { provide: "baseUrl", useValue: "https://localhost:7218/api", multi: true },],
