@@ -10,14 +10,15 @@ import {MatButtonModule} from '@angular/material/button';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
-import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
+
 import { FileUploadModule } from './services/common/file-upload/file-upload.module';
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
 
     
     
