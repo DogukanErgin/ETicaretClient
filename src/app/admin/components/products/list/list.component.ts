@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { CompconfigbaseComponent, SpinnerType } from 'src/app/compconfigbase/compconfigbase.component';
 import { List_Product } from 'src/app/contracts/list_product';
+import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { ProductService } from 'src/app/services/common/product.service';
 
 @Component({
@@ -14,10 +16,10 @@ import { ProductService } from 'src/app/services/common/product.service';
 })
 export class ListComponent extends CompconfigbaseComponent implements OnInit {
 
-  constructor(private productService:ProductService, spinner: NgxSpinnerService,private alertifyService: AlertifyService) {
+  constructor(private productService:ProductService, spinner: NgxSpinnerService,private alertifyService: AlertifyService, private dialogService: DialogService) {
     super(spinner);
    }
-  displayedColumns: string[] = ['name', 'stock', 'price','createdDate','updatedDate','edit','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price','createdDate','updatedDate','photo','edit','delete'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   dataSource : MatTableDataSource<List_Product>=null;
@@ -39,6 +41,15 @@ export class ListComponent extends CompconfigbaseComponent implements OnInit {
 async  ngOnInit(){
 
 this.getProducts();
+    }
+    AddProductImages(id:string ){
+      this.dialogService.openDialog({
+        componentType:SelectProductImageDialogComponent,
+        data:id,
+        options:{
+          width:"1400px"
+        }
+      });
     }
 
 

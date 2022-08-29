@@ -37,8 +37,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    DialogModule,
-    FileUploadModule 
+DialogModule,
+    FileUploadModule
   ]
 })
 export class ProductsModule { }

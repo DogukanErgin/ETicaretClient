@@ -16,7 +16,7 @@ import { HttpClientService } from '../http-client.service';
 export class FileUploadComponent  {
 
 
-@Input() options : Partial<FileUploadOptions>;
+
   
   constructor(
     private httpClientService:HttpClientService,
@@ -26,7 +26,7 @@ export class FileUploadComponent  {
     ) { }
 
   public files: NgxFileDropEntry[];
-
+  @Input() options : Partial<FileUploadOptions>;
   public selectedFiles(files:NgxFileDropEntry[]){
     this.files=files;
     const fileData: FormData=new FormData();

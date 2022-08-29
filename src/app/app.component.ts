@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
  
   }
   ngOnInit(): void {
-    this.toastrService.message("30 dk sürdü","2 kere projeyi siktim aferim bana",{messageType:ToastrMessageType.Error,position:ToastrPosition.BottomRight});
+    this.toastrService.message("..Başlık....","Hoşgeldin",{messageType:ToastrMessageType.Info,position:ToastrPosition.BottomRight});
   }
 
 

@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   constructor(private alertifyService:AlertifyService) { }
 
   ngOnInit(): void {
-    this.alertifyService.message("2 günlük emek tekrardan gitti sinirli",{delay:10,messageType:MessageType.Error,position:Position.BottomRight});
+    this.alertifyService.message("Dashboard mesajı",{delay:10,messageType:MessageType.Success,position:Position.BottomRight});
   }
 
 
