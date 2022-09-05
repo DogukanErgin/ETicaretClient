@@ -3,7 +3,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CompconfigbaseComponent, SpinnerType } from 'src/app/compconfigbase/compconfigbase.component';
 import { Create_Product } from 'src/app/contracts/Create_Product';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
-import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/product.service';
 
 @Component({
@@ -20,17 +19,11 @@ export class CreateComponent extends CompconfigbaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Output() createdProduct: EventEmitter<Create_Product>=new EventEmitter();
-  @Output() fileUploadOptions:Partial<FileUploadOptions> = {
-    action:"upload",
-    controller:"products",
-    explanation:"Resimleri seçin",
-    isAdminPage:true,
-    accept:".png, .jpg, .jpeg"
-  };
-
+  @Output() createdProduct: EventEmitter<Create_Product> = new EventEmitter();
+  
 
 create(name:HTMLInputElement,stock:HTMLInputElement,price:HTMLInputElement){
+  
   this.showSpinner(SpinnerType.BallSpinClockwiseFadeRotating);
 const create_productobject:Create_Product= new Create_Product();
 create_productobject.name=name.value;
