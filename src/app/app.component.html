@@ -16,13 +16,10 @@
           <a class="nav-link" routerLink="basket">Basket</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="register">Register</a>
-        </li>
-        <li class="nav-item">
-        <button mat-button [matMenuTriggerFor]="menu" class="nav-link" routerLink="basket">Dropdown</button>
+        <button mat-button [matMenuTriggerFor]="menu" class="nav-link" routerLink="basket">Kayıt & Login</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item class="nav-link" routerLink="products">Item 1</button>
-          <button mat-menu-item>Item 2</button>
+          <button mat-menu-item routerLink="register">Register</button>
+          <button mat-menu-item routerLink="login">Login</button>
         </mat-menu>
       </li>
         <li class="nav-item">
