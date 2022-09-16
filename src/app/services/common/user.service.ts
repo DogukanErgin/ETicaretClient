@@ -1,7 +1,9 @@
 
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import { Token } from 'src/app/contracts/token/token';
+import { tokenResponse } from 'src/app/contracts/token/tokenResponse';
 import { Create_User } from 'src/app/contracts/users/create_user';
 import { User } from 'src/app/entities/user';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
@@ -24,17 +26,18 @@ return await firstValueFrom(observable) as Create_User;
 }
 async login(userNameOrEmail:string, password:string,callBackFunction ?: ()=>void) : Promise<any >{
 
-
-  const observable:Observable<any | Token>=this.httpClientService.post<any |Token>({
+  const observable:Observable<any | tokenResponse>=this.httpClientService.post<any |tokenResponse>({
     controller:"users",
     action:"login"
   },{userNameOrEmail,password})
 
-const token:Token =  await firstValueFrom(observable) as Token;
+const tokenResponse:tokenResponse =  await firstValueFrom(observable) as tokenResponse;
 
-if(token){
+if(tokenResponse.message==null){
 
-  localStorage.setItem("accessToken",token.accessToken);
+  localStorage.setItem("accessToken",tokenResponse.token.accessToken);
+
+
 this.toastrService.message("Kullanıcı girişi başarıyla sağlanmıştır.","Giriş Başarılı", 
 {
   messageType:ToastrMessageType.Success,
@@ -42,12 +45,37 @@ this.toastrService.message("Kullanıcı girişi başarıyla sağlanmıştır.","
 
 });
 }
+else{
+  this.toastrService.message(`${tokenResponse.message}`,"Giriş Başarısız", 
+{
+  messageType:ToastrMessageType.Warning,
+  position:ToastrPosition.BottomRight,
+
+});
+}
+  callBackFunction();
+}
+async googleLogin(user: SocialUser, callBackFunction?: () => void): Promise<any> {
+  const observable: Observable<SocialUser | tokenResponse> = this.httpClientService.post<SocialUser | tokenResponse>({
+    action: "google-login",
+    controller: "auth"
+  }, user);
+
+  const tokenResponse: tokenResponse = await firstValueFrom(observable) as tokenResponse;
+
+  if (tokenResponse) {
+    localStorage.setItem("accessToken", tokenResponse.token.accessToken);
+ 
+
+    this.toastrService.message("Google üzerinden giriş başarıyla sağlanmıştır.", "Giriş Başarılı", {
+      messageType: ToastrMessageType.Success,
+      position: ToastrPosition.TopRight
+    });
+  }
 
   callBackFunction();
-
-
-
 }
+
 
 }
 

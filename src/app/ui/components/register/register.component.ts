@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CompconfigbaseComponent } from 'src/app/compconfigbase/compconfigbase.component';
 import { Create_User } from 'src/app/contracts/users/create_user';
@@ -14,7 +15,7 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/
 })
 export class RegisterComponent extends CompconfigbaseComponent implements OnInit {
 
-  constructor(private formBuilder: UntypedFormBuilder,private toastrService: CustomToastrService, spinner: NgxSpinnerService, private userService: UserService) {
+  constructor(private formBuilder: UntypedFormBuilder,private toastrService: CustomToastrService, spinner: NgxSpinnerService,private router:Router, private userService: UserService) {
     super(spinner)
   }
 
@@ -67,11 +68,13 @@ export class RegisterComponent extends CompconfigbaseComponent implements OnInit
       return;
 
     const result: Create_User = await this.userService.create(user);
-    if (result.succeeded)
+    if (result.succeeded){
       this.toastrService.message(result.message, "Kullanıcı Kaydı Başarılı", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight
       })
+      this.router.navigate([""]);
+    }
     else
       this.toastrService.message(result.message, "Hata", {
         messageType: ToastrMessageType.Error,
