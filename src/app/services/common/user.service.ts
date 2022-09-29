@@ -27,7 +27,7 @@ return await firstValueFrom(observable) as Create_User;
 async login(userNameOrEmail:string, password:string,callBackFunction ?: ()=>void) : Promise<any >{
 
   const observable:Observable<any | tokenResponse>=this.httpClientService.post<any |tokenResponse>({
-    controller:"users",
+    controller:"auth",
     action:"login"
   },{userNameOrEmail,password})
 
@@ -36,7 +36,7 @@ const tokenResponse:tokenResponse =  await firstValueFrom(observable) as tokenRe
 if(tokenResponse.message==null){
 
   localStorage.setItem("accessToken",tokenResponse.token.accessToken);
-
+  localStorage.setItem("refreshToken", tokenResponse.token.refreshToken);
 
 this.toastrService.message("Kullanıcı girişi başarıyla sağlanmıştır.","Giriş Başarılı", 
 {
@@ -56,6 +56,7 @@ else{
   callBackFunction();
 }
 async googleLogin(user: SocialUser, callBackFunction?: () => void): Promise<any> {
+ 
   const observable: Observable<SocialUser | tokenResponse> = this.httpClientService.post<SocialUser | tokenResponse>({
     action: "google-login",
     controller: "auth"
@@ -65,7 +66,7 @@ async googleLogin(user: SocialUser, callBackFunction?: () => void): Promise<any>
 
   if (tokenResponse) {
     localStorage.setItem("accessToken", tokenResponse.token.accessToken);
- 
+    localStorage.setItem("refreshToken", tokenResponse.token.refreshToken);
 
     this.toastrService.message("Google üzerinden giriş başarıyla sağlanmıştır.", "Giriş Başarılı", {
       messageType: ToastrMessageType.Success,
@@ -76,6 +77,24 @@ async googleLogin(user: SocialUser, callBackFunction?: () => void): Promise<any>
   callBackFunction();
 }
 
+async refreshTokenLogin(refreshToken: string, callBackFunction?: (state) => void): Promise<any> {
+  const observable: Observable<any | tokenResponse> = this.httpClientService.post({
+    action: "refreshtokenlogin",
+    controller: "auth"
+  }, { refreshToken: refreshToken });
 
+  try {
+    const tokenResponse: tokenResponse = await firstValueFrom(observable) as tokenResponse;
+
+    if (tokenResponse) {
+      localStorage.setItem("accessToken", tokenResponse.token.accessToken);
+      localStorage.setItem("refreshToken", tokenResponse.token.refreshToken);
+    }
+
+    callBackFunction(tokenResponse ? true : false);
+  } catch {
+    callBackFunction(false);
+  }
+}
 }
 
