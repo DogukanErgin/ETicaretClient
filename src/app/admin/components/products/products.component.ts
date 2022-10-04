@@ -13,13 +13,17 @@ import { ListComponent } from './list/list.component';
 })
 export class ProductsComponent extends CompconfigbaseComponent implements OnInit {
 
-  constructor(spinner: NgxSpinnerService, private httpClientService: HttpClientService, ) {
+  constructor(spinner: NgxSpinnerService, private httpClientService: HttpClientService ) {
     
     super(spinner);
+   
 
   }
 
   ngOnInit(): void {
+
+
+
 // this.showSpinner(SpinnerType.BallScaleMultiple); 
 // setTimeout(() => {
 //   this.hideSpinner(SpinnerType.BallScaleMultiple);

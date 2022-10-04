@@ -54,9 +54,20 @@ async googleLogin(){
     await this.userService.googleLogin(user,()=>
     {
       this.authService.identityCheck();
+      this.activatedRoute.queryParams.subscribe(params=>{
+        const returnUrl:string=params["returnUrl"];
+        if(returnUrl)
+        this.router.navigate([returnUrl]);
+        
+      else
+      this.router.navigate([""]);
+      });
+    
     this.hideSpinner(SpinnerType.BallSpinClockwiseFadeRotating);
     });
   });
+  
+  
 }
 
 }

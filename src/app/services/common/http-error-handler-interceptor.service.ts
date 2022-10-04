@@ -45,7 +45,9 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
           this.toastrService.message("Sunucuya erişilmiyor!", "Sunucu hatası!", {
             messageType: ToastrMessageType.Warning,
             position: ToastrPosition.BottomFullWidth
-          });
+          }
+          
+          );
           break;
         case HttpStatusCode.BadRequest:
           this.toastrService.message("Geçersiz istek yapıldı!", "Geçersiz istek!", {
@@ -67,7 +69,9 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
           break;
       }
 
+      this.spinner.hide(SpinnerType.BallScaleMultiple);
       this.spinner.hide(SpinnerType.BallAtom);
+      this.spinner.hide(SpinnerType.BallSpinClockwiseFadeRotating);
       return of(error);
     }));
   }
