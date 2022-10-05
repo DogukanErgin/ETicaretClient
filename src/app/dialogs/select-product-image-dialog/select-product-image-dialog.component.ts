@@ -65,13 +65,13 @@ async deleteImage(imageId:string, event:any){
   })
 }
 
-// showCase(imageId: string) {
-//   this.spinner.show(SpinnerType.BallAtom);
+ showCase(imageId: string) {
+   this.spinner.show(SpinnerType.BallAtom);
 
-//   this.productService.changeShowcaseImage(imageId, this.data as string, () => {
-//     this.spinner.hide(SpinnerType.BallAtom);
-//   });
-// }
+   this.productService.changeShowcaseImage(imageId, this.data as string, () => {
+     this.spinner.hide(SpinnerType.BallAtom);
+   });
+}
 
 }
 export enum SelectProductImageState{

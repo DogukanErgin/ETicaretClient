@@ -22,8 +22,6 @@ export class ProductsComponent extends CompconfigbaseComponent implements OnInit
 
   ngOnInit(): void {
 
-
-
 // this.showSpinner(SpinnerType.BallScaleMultiple); 
 // setTimeout(() => {
 //   this.hideSpinner(SpinnerType.BallScaleMultiple);
